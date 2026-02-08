@@ -1,19 +1,22 @@
 package rocks.minestom;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
+import com.google.gson.stream.JsonWriter;
 import net.minestom.server.codec.Result;
 import net.minestom.server.codec.Transcoder;
 import org.tinylog.Logger;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 final class ConfigLoader {
-    private static final Gson GSON = new Gson();
     private static final Path PATH = Path.of("config.json");
+    private static final Gson GSON = new GsonBuilder()
+            .setPrettyPrinting()
+            .create();
+
     private static final Config DEFAULT_CONFIG = new Config(
             "0.0.0.0",
             25565,
@@ -21,6 +24,12 @@ final class ConfigLoader {
 
     static Config loadConfig() {
         Config config;
+
+        if (Files.notExists(PATH)) {
+            Logger.info("Creating a config file.");
+            saveConfig(DEFAULT_CONFIG);
+            return loadConfig();
+        }
 
         try {
             var rawConfig = GSON.fromJson(Files.readString(PATH), JsonObject.class);
@@ -54,9 +63,17 @@ final class ConfigLoader {
         }
 
         try {
-            Files.writeString(PATH, GSON.toJson(element));
+            Files.writeString(PATH, encodeWithProperFormatting(element));
         } catch (IOException e) {
             Logger.error("Failed to write to config file!", e);
         }
+    }
+
+    private static String encodeWithProperFormatting(JsonElement element) throws IOException {
+        var stringWriter = new StringWriter();
+        var jsonWriter = new JsonWriter(stringWriter);
+        jsonWriter.setIndent(" ".repeat(4));
+        GSON.toJson(element, jsonWriter);
+        return stringWriter.toString();
     }
 }

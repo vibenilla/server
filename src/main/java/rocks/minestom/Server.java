@@ -9,6 +9,7 @@ import net.minestom.server.instance.generator.Generator;
 import net.minestom.server.registry.RegistryKey;
 import net.minestom.server.world.DimensionType;
 import org.jetbrains.annotations.Nullable;
+import org.tinylog.Logger;
 import rocks.minestom.listener.*;
 
 import static rocks.minestom.ConfigLoader.loadConfig;
@@ -35,6 +36,8 @@ public final class Server {
 
         MinestomPvP.init();
         registerEventListeners();
+
+        Logger.info("Started the server.");
         server.start(config.address(), config.port());
     }
 
