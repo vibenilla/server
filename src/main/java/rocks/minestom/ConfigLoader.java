@@ -27,8 +27,8 @@ final class ConfigLoader {
 
         if (Files.notExists(PATH)) {
             Logger.info("Creating a config file.");
-            saveConfig(DEFAULT_CONFIG);
-            return loadConfig();
+            saveDefaultConfig();
+            return DEFAULT_CONFIG;
         }
 
         try {
@@ -50,10 +50,10 @@ final class ConfigLoader {
         return config;
     }
 
-    static void saveConfig(Config config) {
+    static void saveDefaultConfig() {
         JsonElement element;
 
-        switch (Config.CODEC.encode(Transcoder.JSON, config)) {
+        switch (Config.CODEC.encode(Transcoder.JSON, DEFAULT_CONFIG)) {
             case Result.Ok<JsonElement> ok -> element = ok.value();
 
             case Result.Error<JsonElement> error -> {
