@@ -6,7 +6,7 @@ import net.minestom.server.event.EventListener;
 import net.minestom.server.event.player.PlayerDisconnectEvent;
 import org.jetbrains.annotations.NotNull;
 
-public final class DisconnectListener implements EventListener<PlayerDisconnectEvent> {
+public final class PlayerDisconnectListener implements EventListener<PlayerDisconnectEvent> {
     @Override
     public @NotNull Class<PlayerDisconnectEvent> eventType() {
         return PlayerDisconnectEvent.class;

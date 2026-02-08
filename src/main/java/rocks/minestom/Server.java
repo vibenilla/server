@@ -52,10 +52,12 @@ public final class Server {
 
     private static void registerEventListeners() {
         MinecraftServer.getGlobalEventHandler()
-                .addListener(new ConnectListener())
-                .addListener(new DisconnectListener())
-                .addListener(new ChunkUnloadListener())
-                .addListener(new ItemCollectListener())
-                .addListener(new ItemDropListener());
+                .addListener(new AsyncPlayerConfigurationListener())
+                .addListener(new PlayerDisconnectListener())
+                .addListener(new PlayerChunkUnloadListener())
+                .addListener(new PlayerGameModeRequestListener())
+                .addListener(new PickupItemListener())
+                .addListener(new ItemDropListener())
+                ;
     }
 }

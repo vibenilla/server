@@ -4,7 +4,7 @@ import net.minestom.server.event.EventListener;
 import net.minestom.server.event.player.PlayerChunkUnloadEvent;
 import org.jetbrains.annotations.NotNull;
 
-public final class ChunkUnloadListener implements EventListener<PlayerChunkUnloadEvent> {
+public final class PlayerChunkUnloadListener implements EventListener<PlayerChunkUnloadEvent> {
     @Override
     public @NotNull Class<PlayerChunkUnloadEvent> eventType() {
         return PlayerChunkUnloadEvent.class;

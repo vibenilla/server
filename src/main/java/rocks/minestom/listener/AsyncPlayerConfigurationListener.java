@@ -13,7 +13,7 @@ import rocks.minestom.Server;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 
-public final class ConnectListener implements EventListener<AsyncPlayerConfigurationEvent> {
+public final class AsyncPlayerConfigurationListener implements EventListener<AsyncPlayerConfigurationEvent> {
     private static final int SPAWN_X = 0;
     private static final int SPAWN_Z = 0;
     private static final int PRELOAD_RADIUS = 2;
