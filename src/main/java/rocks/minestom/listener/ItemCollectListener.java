@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public record ItemCollectListener() implements EventListener<PickupItemEvent> {
+public final class ItemCollectListener implements EventListener<PickupItemEvent> {
     @Override
     public @NotNull Class<PickupItemEvent> eventType() {
         return PickupItemEvent.class;

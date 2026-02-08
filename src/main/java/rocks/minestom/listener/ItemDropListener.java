@@ -6,7 +6,7 @@ import net.minestom.server.event.item.ItemDropEvent;
 import net.minestom.server.utils.time.TimeUnit;
 import org.jetbrains.annotations.NotNull;
 
-public record ItemDropListener() implements EventListener<ItemDropEvent> {
+public final class ItemDropListener implements EventListener<ItemDropEvent> {
     @Override
     public @NotNull Class<ItemDropEvent> eventType() {
         return ItemDropEvent.class;
