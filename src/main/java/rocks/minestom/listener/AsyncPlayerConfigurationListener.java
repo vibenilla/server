@@ -28,10 +28,12 @@ public final class AsyncPlayerConfigurationListener implements EventListener<Asy
         var player = event.getPlayer();
         var instance = Server.overworld;
 
-        event.setSpawningInstance(instance);
         loadChunks(instance, SPAWN_X, SPAWN_Z, PRELOAD_RADIUS).join();
         var respawnPoint = new Pos(SPAWN_X + 0.5D, this.findHighestBlock(instance, SPAWN_X, SPAWN_Z) + 1.0D, SPAWN_Z + 0.5D);
+
+        event.setSpawningInstance(instance);
         player.setRespawnPoint(respawnPoint);
+        player.setPermissionLevel(4);
 
         instance.sendMessage(Component.text(
                 event.getPlayer().getUsername() + " joined the game",
