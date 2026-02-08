@@ -5,6 +5,7 @@ import net.minestom.server.Auth;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.instance.ChunkLoader;
 import net.minestom.server.instance.InstanceContainer;
+import net.minestom.server.instance.block.Block;
 import net.minestom.server.instance.generator.Generator;
 import net.minestom.server.registry.RegistryKey;
 import net.minestom.server.world.DimensionType;
@@ -30,9 +31,9 @@ public final class Server {
             case BUNGEE -> new Auth.Bungee();
         });
 
-        overworld = createInstance(DimensionType.OVERWORLD, null);
-        theNether = createInstance(DimensionType.THE_NETHER, null);
-        theEnd = createInstance(DimensionType.THE_END, null);
+        overworld = createInstance(DimensionType.OVERWORLD, new FlatGenerator(Block.GRASS_BLOCK));
+        theNether = createInstance(DimensionType.THE_NETHER, new FlatGenerator(Block.NETHERRACK));
+        theEnd = createInstance(DimensionType.THE_END, new FlatGenerator(Block.END_STONE));
 
         MinestomPvP.init();
         registerEventListeners();
