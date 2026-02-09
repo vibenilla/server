@@ -12,6 +12,9 @@ import net.minestom.server.world.DimensionType;
 import org.jetbrains.annotations.Nullable;
 import org.tinylog.Logger;
 import rocks.minestom.listener.*;
+import rocks.minestom.worldgen.WorldGenerators;
+
+import java.nio.file.Path;
 
 import static rocks.minestom.ConfigLoader.loadConfig;
 
@@ -20,6 +23,7 @@ public final class Server {
     public static InstanceContainer overworld;
     public static InstanceContainer theNether;
     public static InstanceContainer theEnd;
+    public static WorldGenerators worldGenerators;
 
     static void main() {
         config = loadConfig();
@@ -31,9 +35,10 @@ public final class Server {
             case BUNGEE -> new Auth.Bungee();
         });
 
-        overworld = createInstance(DimensionType.OVERWORLD, new FlatGenerator(Block.GRASS_BLOCK));
-        theNether = createInstance(DimensionType.THE_NETHER, new FlatGenerator(Block.NETHERRACK));
-        theEnd = createInstance(DimensionType.THE_END, new FlatGenerator(Block.END_STONE));
+        worldGenerators = new WorldGenerators(Path.of("."), config.seed());
+        overworld = createInstance(DimensionType.OVERWORLD, worldGenerators.overworld());
+        theNether = createInstance(DimensionType.THE_NETHER, worldGenerators.nether());
+        theEnd = createInstance(DimensionType.THE_END, worldGenerators.end());
 
         MinestomPvP.init();
         registerEventListeners();

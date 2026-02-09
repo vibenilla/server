@@ -5,11 +5,12 @@ import net.minestom.server.codec.StructCodec;
 
 import static net.minestom.server.codec.Codec.*;
 
-public record Config(String address, int port, Authentication authentication) {
+public record Config(String address, int port, Authentication authentication, long seed) {
     public static final Codec<Config> CODEC = StructCodec.struct(
             "address", STRING, Config::address,
             "port", INT, Config::port,
             "authentication", Authentication.CODEC, Config::authentication,
+            "seed", LONG, Config::seed,
             Config::new);
 
     public enum Authentication {

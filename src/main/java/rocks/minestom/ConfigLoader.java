@@ -20,7 +20,8 @@ final class ConfigLoader {
     private static final Config DEFAULT_CONFIG = new Config(
             "0.0.0.0",
             25565,
-            Config.Authentication.ONLINE);
+            Config.Authentication.ONLINE,
+            0);
 
     static Config loadConfig() {
         Config config;
