@@ -1,5 +1,6 @@
 config.json
 logs/
+data/
 
 .gradle
 build/
