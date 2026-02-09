@@ -12,7 +12,10 @@ public final class PlayerGameModeRequestListener implements EventListener<Player
 
     @Override
     public @NotNull Result run(@NotNull PlayerGameModeRequestEvent event) {
-        event.getPlayer().setGameMode(event.getRequestedGameMode());
+        if (event.getPlayer().getPermissionLevel() >= 2) {
+            event.getPlayer().setGameMode(event.getRequestedGameMode());
+        }
+
         return Result.SUCCESS;
     }
 }
